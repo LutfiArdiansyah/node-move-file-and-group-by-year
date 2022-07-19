@@ -20,25 +20,25 @@ async function main() {
     const file = files[index - 1];
 
     let fileName = file.name;
-    fs.statSync(`${PATH_SOURCE}${path.sep}${fileName}`, function (err, stats) {
-      if (!err) {
-        let year = stats.mtime.getFullYear();
-        let destination = `${PATH_DESTINATION}${path.sep}${year}${path.sep}`;
 
-        if (!fs.existsSync(destination)) {
-          fs.mkdirSync(`${destination}`);
-        }
+    let stats = fs.statSync(`${PATH_SOURCE}${path.sep}${fileName}`);
 
-        fs.copyFileSync(
-          `${PATH_SOURCE}${path.sep}${fileName}`,
-          `${destination}${fileName}`
-        );
+    let year = stats.mtime.getFullYear();
 
-        if (REMOVE_OLD) {
-          fs.rmSync(`${PATH_SOURCE}${path.sep}${fileName}`);
-        }
-      }
-    });
+    let destination = `${PATH_DESTINATION}${path.sep}${year}${path.sep}`;
+
+    if (!fs.existsSync(destination)) {
+      fs.mkdirSync(`${destination}`);
+    }
+
+    fs.copyFileSync(
+      `${PATH_SOURCE}${path.sep}${fileName}`,
+      `${destination}${fileName}`
+    );
+
+    if (REMOVE_OLD) {
+      fs.rmSync(`${PATH_SOURCE}${path.sep}${fileName}`);
+    }
 
     fileMoved = [...fileMoved, fileName];
 
