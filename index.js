@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const PATH_SOURCE = "C:\\Users\\Lutfi Ardiansyah\\Downloads\\Documents";
-const PATH_DESTINATION = "C:\\Users\\Lutfi Ardiansyah\\Downloads\\Documents";
+const PATH_SOURCE = "/downloads";
+const PATH_DESTINATION = "/logs";
 const REMOVE_OLD = false;
 
 async function main() {
